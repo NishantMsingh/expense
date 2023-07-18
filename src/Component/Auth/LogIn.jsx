@@ -74,6 +74,7 @@ const Login = () => {
     navigate("/SignUp");
   }
 
+
   return (
     <div className={classes.logincontainer}>
       <h2 className={classes.titlelogin}>Log in</h2>
@@ -106,7 +107,9 @@ const Login = () => {
        
         <button className={classes.logbutton} onClick={handleSubmit} disabled={isdisabled}>Log in</button>
         <button className={classes.logbutton} onClick={handleSignup} disabled={isdisabled}>Create new account</button>
-         <Link to="" className={classes.active}>forget password</Link>
+        <Link to="/ForgetPassword" className={classes.active}>
+  forget password
+</Link>
       </form>
     </div>
   );
