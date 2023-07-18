@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import classes from './Home.module.css';
-import { Link, Outlet } from 'react-router-dom';
-
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 const Home = () => {
+  const navigate=useNavigate();
   const [userDetails, setUserDetails] = useState(null);
+ const LogoutHandler=()=>{
+  localStorage.removeItem("idToken");
+  alert("Logged out Successfully");
+  navigate("/Login");
+ }
+
 
   useEffect(() => {
     const api_key = 'AIzaSyDgmSRRfCUQUKwn0F8QuuODw2DaApM3JXw';
@@ -44,8 +50,10 @@ const Home = () => {
       <span className={classes.username}>{userDetails.displayName}</span>
     </div>
   ) : (
-    <span>Your Profile is incomplete <Link to="/Profile">Complete now</Link></span>
+    <span className={classes.inx}>Your Profile is incomplete <Link to="/Profile">Complete now</Link></span>
   )}
+
+  <span className={classes.logout} onClick={LogoutHandler}>Log out</span>
 </div>
 
       <Outlet />
