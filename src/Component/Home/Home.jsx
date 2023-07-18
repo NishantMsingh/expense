@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import classes from './Home.module.css';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import CartContext from '../../Store/Cart-context';
-
+import DailyExpensesPage from "../Expense/DailyExpensesPage "
 const Home = () => {
   const ctx=useContext(CartContext);
   const navigate=useNavigate();
@@ -59,7 +59,7 @@ const Home = () => {
   <span className={classes.logout} onClick={LogoutHandler}>Log out</span>
 </div>
 
-      <Outlet />
+<DailyExpensesPage />
     </div>
   );
 };

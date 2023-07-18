@@ -23,11 +23,15 @@ const App = () => {
   return (
     <BrowserRouter>
     <Routes>
-    {ctx.isLoggedin && <Route path="/Home" element={<Home />} />}
+    {ctx.isLoggedin && <Route path="/Home" element={<Home />} > 
+    
+    
+    </Route>}
+   
    {ctx.isLoggedin && <Route path="/Profile" element={<Profile />} /> }
     <Route path="/Signup" element={<SignUp />} />
     <Route path="/ForgetPassword" element={<ForgetPassword />} />
-    <Route path="*" element={<LogIn />} />
+   {!ctx.isLoggedin&& <Route path="*" element={<LogIn />} />}
     </Routes>
   </BrowserRouter>
 
