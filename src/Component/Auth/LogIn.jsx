@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import classes from './LogIn.module.css'; 
 import { Link, useNavigate } from 'react-router-dom';
+import CartContext from '../../Store/Cart-context';
 
 
 const Login = () => {
+  const ctx=useContext(CartContext);
    const navigate=useNavigate();
+   const [isdisabled,setDisabled]=useState(false);
    
    const [formData, setFormData] = useState({
     email: '',
@@ -18,6 +21,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setDisabled(true);
         try{
           fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDgmSRRfCUQUKwn0F8QuuODw2DaApM3JXw`, {
             method: 'POST',
@@ -44,9 +48,13 @@ const Login = () => {
             })
             .then(data => {
              console.log(data);
+             let value={
+              idToken:data.idToken,
+              email:data.email
+             }
+             ctx.logIn(value);
              alert("Logged in successfully");
-             localStorage.setItem("idToken",data.idToken);
-             localStorage.setItem("email",data.email);
+           
              navigate('/Home');
             })
             .catch(error => {
@@ -59,37 +67,45 @@ const Login = () => {
           alert("Authentication failed");
         }
     
-    console.log(formData);
+        setDisabled(false);
   };
+
+  const handleSignup=()=>{
+    navigate("/SignUp");
+  }
 
   return (
     <div className={classes.logincontainer}>
       <h2 className={classes.titlelogin}>Log in</h2>
 
-      <form  className = {classes.loginform} onSubmit={handleSubmit}>
+      <form  className = {classes.loginform}>
         <div className={classes.loginformGroup}>
-          <label>Email:</label>
+          <label htmlFor='email'>Email:</label>
           <input className={classes.inputlog}
             type="email"
             name="email"
+            id='email'
             value={formData.email}
             onChange={handleChange}
+            autocomplete="current-password" 
             required
           />
+
         </div>
         <div className={classes.loginformGroup}>
-          <label>Password:</label>
+          <label htmlFor='password'>Password:</label>
           <input  className={classes.inputlog}
             type="password"
             name="password"
+            id='password'
             value={formData.password}
             onChange={handleChange}
             required
           />
         </div>
        
-        <button className={classes.logbutton} type="submit">Log in</button>
-        <button className={classes.logbutton}>Create new account</button>
+        <button className={classes.logbutton} onClick={handleSubmit} disabled={isdisabled}>Log in</button>
+        <button className={classes.logbutton} onClick={handleSignup} disabled={isdisabled}>Create new account</button>
          <Link to="" className={classes.active}>forget password</Link>
       </form>
     </div>

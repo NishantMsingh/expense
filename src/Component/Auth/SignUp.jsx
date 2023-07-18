@@ -1,9 +1,11 @@
 import React, {useState } from 'react';
 import classes from './Signup.module.css'; 
+import { useNavigate } from 'react-router-dom';
 
 
 const SignUp = () => {
-  
+  const navigate=useNavigate();
+  const [isdisabled,setDisabled]=useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -17,7 +19,9 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(formData.password===formData.confirmPassword)
+    setDisabled(true);
+
+    if(formData.password===formData.confirmPassword && formData.password.length>6 && formData.email.includes("@"))
     {
       try
       {
@@ -68,15 +72,19 @@ const SignUp = () => {
     }
     else
     {
-      alert("Given password is not correct");
+      alert("Given Credential is wrong");
     }
     setFormData({
       email: '',
       password: '',
       confirmPassword: '',
     });
+    setDisabled(false);
    
   };
+const loginHandler=()=>{
+  navigate("/Login");
+}
 
   return (
     <div className={classes["signup-container"]}>
@@ -113,8 +121,8 @@ const SignUp = () => {
             required
           />
         </div>
-        <button className={classes.signbutton} type="submit">Sign Up</button>
-        <button className={classes.signbutton}>Already have an account</button>
+        <button className={classes.signbutton} onClick={handleSubmit} disabled={isdisabled}>Sign Up</button>
+        <button className={classes.signbutton} onClick={loginHandler} disabled={isdisabled}>Already have an account</button>
       </form>
     </div>
   );

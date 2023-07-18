@@ -1,21 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import classes from './Home.module.css';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
+import CartContext from '../../Store/Cart-context';
+
 const Home = () => {
+  const ctx=useContext(CartContext);
   const navigate=useNavigate();
   const [userDetails, setUserDetails] = useState(null);
  const LogoutHandler=()=>{
-  localStorage.removeItem("idToken");
+   navigate("/Login");
+   ctx.logOut();
   alert("Logged out Successfully");
-  navigate("/Login");
+
  }
-
-
+ 
   useEffect(() => {
     const api_key = 'AIzaSyDgmSRRfCUQUKwn0F8QuuODw2DaApM3JXw';
     const api_url = `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${api_key}`;
 
-    const idToken = localStorage.getItem('idToken'); // Assuming you have stored the ID token in localStorage
+    const idToken = localStorage.getItem('idToken'); 
 
     if (idToken) {
       fetch(api_url, {
@@ -32,7 +35,7 @@ const Home = () => {
           return response.json();
         })
         .then((data) => {
-          setUserDetails(data.users[0]); // Assuming the response contains an array of users and you want to use the first user
+          setUserDetails(data.users[0]); 
         })
         .catch((error) => {
           console.error(error);
@@ -43,7 +46,7 @@ const Home = () => {
   return (
     <div className={classes.homeBody}>
      <div className={classes.HomeHeader}>
-  <h1>Welcome to Expense Tracker</h1>
+  <h3>Welcome to Expense Tracker</h3>
   {userDetails ? (
     <div className={classes.profiledeatils}>
       <img src={userDetails.photoUrl} alt="" className={classes.profileimage} />
