@@ -1,0 +1,102 @@
+.profileBody{
+    max-width: 80%;
+    padding: .75rem;
+    margin: 0px auto;
+}
+.profile{
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding-bottom: .75rem;
+   border-bottom: .20rem solid rgba(0, 0, 0, 0.486);
+}
+.incomplete{
+    font-size: 1rem;
+    background-color: rgba(255, 127, 80, 0.418);
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+.quote{
+    font-size: 1.5rem;
+    font-weight: 400px;
+}
+
+.link{
+    color: black;
+    font-size: 16px;
+    font-weight: 400px;
+}
+.link:active{
+    color: rgb(47, 204, 100);
+}
+.formHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.formHeading{
+    font-size: 1.5rem;
+    color: rgba(0, 0, 0, 0.568);
+    padding: 3rem 0rem;
+}
+.fromContainer{
+    width: 50%;
+    margin: 3rem auto;
+    padding: 0rem 3rem 3rem 3rem;
+    background-color: rgba(255, 127, 80, 0.438);
+    
+    border-radius: 10px;
+    
+}
+.update{
+    color: white;
+    font-size: 1rem;
+    margin-top: 1rem;
+    padding: .5em 2rem;
+    background-color: rgba(0, 0, 0, 0.562);
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.formGroup{
+    margin-top: 10px;
+    
+}
+
+label{
+    font-size: 1rem;
+}
+input{
+    padding: 5px;
+    font-size: 1rem;
+    
+    border-radius: 5px;
+    border: 1px solid black;
+}
+.cancel{
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.568);
+    cursor: pointer;
+    background-color: #ffffff00;
+    padding: 2px 10px;
+    border-radius: 10px;
+    transition: all .5s ease-in-out;
+    user-select: none;
+}
+.cancel:hover{
+    background-color: rgba(0, 0, 0, 0.349);
+    color: white;
+}
+
+@media (max-width:768px) {
+    .profileBody{
+        max-width: 100%;
+        padding: 0px 10px;
+    }
+    .fromContainer{
+        width: 90%;
+        margin: 0% auto;
+        padding: 3rem 0rem;
+    }
+}

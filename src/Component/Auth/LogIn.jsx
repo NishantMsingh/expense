@@ -45,6 +45,8 @@ const Login = () => {
             .then(data => {
              console.log(data);
              alert("Logged in successfully");
+             localStorage.setItem("idToken",data.idToken);
+             localStorage.setItem("email",data.email);
              navigate('/Home');
             })
             .catch(error => {

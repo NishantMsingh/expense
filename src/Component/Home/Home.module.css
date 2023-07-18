@@ -1,0 +1,15 @@
+.HomeHeader{
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+}
+.homeBody{
+    max-width: 80%;
+    margin: 0px auto;
+}
+@media (max-width:768px) {
+    .homeBody{
+        max-width: 100%;
+        padding: 0px 10px;
+    }
+}
