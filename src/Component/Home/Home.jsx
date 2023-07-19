@@ -49,7 +49,7 @@ const Home = () => {
   <h3>Welcome to Expense Tracker</h3>
   {userDetails ? (
     <div className={classes.profiledeatils}>
-      <img src={userDetails.photoUrl} alt="" className={classes.profileimage} />
+      <img src={userDetails.photoUrl} alt="/" className={classes.profileimage} />
       <span className={classes.username}>{userDetails.displayName}</span>
     </div>
   ) : (

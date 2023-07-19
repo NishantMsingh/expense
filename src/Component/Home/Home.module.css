@@ -4,12 +4,15 @@
     justify-content: space-between;
     position: relative;
     top: 0;
+    padding: 0px 3rem;
+    border-radius: 0px 0px 10px 10px;
+    background-color: rgba(255, 127, 80, 0.411);
   }
   
   .logout {
     /* opacity: 0; */
     cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.575);
+    background-color: rgba(0, 0, 0, 0.952);
     border-radius: 8px;
     bottom: -27%;
     color: white;
@@ -22,6 +25,7 @@
 .homeBody{
     max-width: 80%;
     margin: 0px auto;
+   
 }
 @media (max-width:768px) {
     .homeBody{

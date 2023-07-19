@@ -53,9 +53,11 @@ const Login = () => {
               email:data.email
              }
              ctx.logIn(value);
-             alert("Logged in successfully");
-           
              navigate('/Home');
+             alert("Logged in successfully");
+         
+           
+            
             })
             .catch(error => {
               // Handle fetch error

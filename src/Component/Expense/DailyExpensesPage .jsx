@@ -1,13 +1,14 @@
 import React from 'react';
 import AddExpenseForm from './AddExpenseForm';
+import ExpenseList from './ExpenseList';
 
-const DailyExpensesPage = () => {
+const MainComponent = () => {
   return (
     <div>
-      <h1>Daily Expenses</h1>
       <AddExpenseForm />
+      <ExpenseList />
     </div>
   );
 };
 
-export default DailyExpensesPage;
+export default MainComponent;

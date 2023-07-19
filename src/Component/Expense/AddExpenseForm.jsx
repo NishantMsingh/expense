@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import classes from './AddExpenseForm.module.css';
-
+import CartContext from '../../Store/Cart-context';
 const AddExpenseForm = () => {
+  const ctx=useContext(CartContext);
   const [formData, setFormData] = useState({
     amount: '',
     description: '',
@@ -15,12 +16,39 @@ const AddExpenseForm = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    formData.email=localStorage.getItem("email");
     console.log(formData);
-    // You can add your logic here to save the expense data to a database or perform any other action.
-    // For now, we'll just log the form data to the console.
+
+    fetch('https://expense-8205e-default-rtdb.firebaseio.com/expenses.json', {
+      method: 'POST',
+      body: JSON.stringify(formData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((response) => {
+        if (!response.ok) {
+          throw new Error('Something went wrong!');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Expense added successfully!', data);
+        ctx.addItem(formData); // Optionally, you can add the expense to the context as well.
+        alert('Expense Added Successfully');
+      })
+      .catch((error) => {
+        console.error('Error adding expense:', error);
+        alert('Error adding expense');
+      });
+      setFormData({
+        amount: '',
+        description: '',
+        category: '',
+      })
   };
+  
 
   return (
     <div className={classes.container}>

@@ -1,0 +1,23 @@
+.expenseList {
+    margin-top: 20px;
+  }
+  
+  .expenseItem {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  
+  .label {
+    font-weight: bold;
+    color: #555;
+  }
+
+  
+  

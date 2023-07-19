@@ -4,6 +4,7 @@ const CartProvider = (props) => {
 const[loginState,setLoginState]=useState(false);
 const[token,setToken]=useState(null);
 const[emaill,setEmail]=useState(null);
+const[expense,setExpense]=useState([]);
 
 const LoginHandler=(value)=>{
     setLoginState(true);
@@ -19,12 +20,20 @@ const LogoutHandler=()=>{
     localStorage.removeItem("idToken");
     localStorage.removeItem("email");
 }
+
+const ExpenseHandler=(value)=>{
+  setExpense((prevExpense)=>{
+    return [...prevExpense,value]
+  })
+}
 const contextValue={
     idToken:token,
     email:emaill,
     isLoggedin:loginState,
     logIn:LoginHandler,
-    logOut:LogoutHandler
+    logOut:LogoutHandler,
+    addItem:ExpenseHandler,
+    expenses:expense
 }
 
 
