@@ -18,36 +18,45 @@ const AddExpenseForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    formData.email=localStorage.getItem("email");
-    console.log(formData);
-
+    const expenseData = {
+      ...formData,
+      email: localStorage.getItem("email"),
+      date: new Date().toISOString(), // Convert date to ISO string format
+    };
+  
+  
     fetch('https://expense-8205e-default-rtdb.firebaseio.com/expenses.json', {
       method: 'POST',
-      body: JSON.stringify(formData),
+      body: JSON.stringify(expenseData),
       headers: {
         'Content-Type': 'application/json',
       },
-    }).then((response) => {
-        if (!response.ok) {
-          throw new Error('Something went wrong!');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log('Expense added successfully!', data);
-        ctx.addItem(formData); // Optionally, you can add the expense to the context as well.
-        alert('Expense Added Successfully');
-      })
-      .catch((error) => {
-        console.error('Error adding expense:', error);
-        alert('Error adding expense');
-      });
-      setFormData({
-        amount: '',
-        description: '',
-        category: '',
-      })
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Something went wrong!');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const expenseWithId = { ...expenseData, id: data.name };
+      console.log(expenseWithId);
+      ctx.addItem(expenseWithId); 
+      console.log('Expense Added Successfully');
+    })
+    .catch((error) => {
+      console.error('Error adding expense:', error);
+      console.log('Error adding expense');
+    });
+  
+    // Reset the form data after submission
+    setFormData({
+      amount: '',
+      description: '',
+      category: '',
+    });
   };
+  
   
 
   return (

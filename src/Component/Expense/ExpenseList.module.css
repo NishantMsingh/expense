@@ -18,6 +18,24 @@
     font-weight: bold;
     color: #555;
   }
+  .buttonedit{
+    cursor: pointer;
+    margin-left: 5px;
+    padding: 3px 6px;
+  }
+  .buttondel:hover{
+    color: white;
+    background-color:red;
+  }
+  .buttondel{
+    cursor: pointer;
+    margin-left: 5px;
+    padding: 3px 6px;
+  }
+  .buttonedit:hover{
+    color: white;
+    background-color: green;
+  }
 
   
   
