@@ -20,21 +20,23 @@ const ExpenseList = () => {
       }
     })
     .then((data) => {
-      const userEmail = localStorage.getItem('email');
-      const filteredExpenses = Object.values(data).filter(
-        (expense) => expense.email === userEmail
-      );
-      filteredExpenses.forEach((expense) => {
-        ctx.addItem(expense);
-      });
+      for(const key in data)
+      {
+        if (data.hasOwnProperty(key)) {
+          const value = data[key];
+          let temp={...value,id:key};
+          ctx.addItem(temp);
+        }
+      }
     })
     .catch((error) => {
       console.log('Data not found');
     }); 
-}}, [once, ctx] ); 
+}},[]); 
 
 
 const deleteExpenseHandler=(value)=>{
+
   fetch(`https://expense-8205e-default-rtdb.firebaseio.com/expenses/${value.id}.json`, {
     method: 'DELETE',
   })
@@ -42,8 +44,8 @@ const deleteExpenseHandler=(value)=>{
       if (!response.ok) {
         throw new Error('Failed to delete expense');
       }
-      ctx.deleteItem(value.id);
       console.log("Deleted Successfully");
+      ctx.deleteItem(value.id);
     })
     .catch((error) => {
      console.log('Error deleting expense:', error);

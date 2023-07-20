@@ -25,10 +25,11 @@ const CartProvider = (props) => {
     localStorage.removeItem('email');
   };
 
-  const ExpenseHandler = (value) => {
+  const ExpenseHandler = (data) => {
     setExpense((prevExpense) => {
-      return [...prevExpense, value];
+      return [...prevExpense, data];
     });
+    console.log(expense);
   };
 
   const ExpenseDeleteHandler = (id) => {

@@ -90,7 +90,7 @@ const Login = () => {
             id='email'
             value={formData.email}
             onChange={handleChange}
-            autocomplete="current-password" 
+        
             required
           />
 
@@ -101,6 +101,7 @@ const Login = () => {
             type="password"
             name="password"
             id='password'
+            autoComplete="current-password" 
             value={formData.password}
             onChange={handleChange}
             required
