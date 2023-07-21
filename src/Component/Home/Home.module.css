@@ -8,7 +8,31 @@
     border-radius: 0px 0px 10px 10px;
     background-color: rgba(255, 127, 80, 0.411);
   }
-  
+
+  .off{
+    font-size: 12px !important;
+    background-color: #fff;
+    padding: 5px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .on{
+    font-size: 12px !important;
+    background-color: #000000;
+    color: white;
+    padding: 5px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .premium{
+    background-color: rgb(65, 155, 65);
+    color: white;
+    margin-right: 5px;
+    border-radius: 10px;
+    padding: 5px 20px;
+    cursor: pointer;
+  }
+  .heading{user-select: none;}
   .logout {
     /* opacity: 0; */
     cursor: pointer;
@@ -22,10 +46,16 @@
     right: 0;
     font-weight: bold;
 }
-.homeBody{
+.homeBodyLight{
     max-width: 80%;
     margin: 0px auto;
+    background-color: #fff;
    
+}
+.homeBodyDark{
+  max-width: 80%;
+  margin: 0px auto;
+  background-color: #00000075;
 }
 @media (max-width:768px) {
     .homeBody{

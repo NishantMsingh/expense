@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import CartContext from '../../Store/Cart-context';
 import classes from './ExpenseList.module.css';
+import Papa from 'papaparse';
 
 const ExpenseList = () => {
   const ctx = useContext(CartContext);
@@ -45,7 +46,7 @@ const deleteExpenseHandler=(value)=>{
         throw new Error('Failed to delete expense');
       }
       console.log("Deleted Successfully");
-      ctx.deleteItem(value.id);
+      ctx.deleteItem(value);
     })
     .catch((error) => {
      console.log('Error deleting expense:', error);
@@ -53,12 +54,28 @@ const deleteExpenseHandler=(value)=>{
 }
 
 
+const exportToCSV = () => {
+  const csv = Papa.unparse(ctx.expenses, {
+    header: true,
+  });
+
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'expenses.csv';
+  a.click();
+
+  URL.revokeObjectURL(url);
+};
 
 
 
   return (
     <div className={classes.expenseList}>
       <h2>Expense List</h2>
+      
       <ul>
         {ctx.expenses.map((expense, index) => (
           <li key={index} className={classes.expenseItem}>
@@ -84,6 +101,8 @@ const deleteExpenseHandler=(value)=>{
           </li>
         ))}
       </ul>
+      
+      <span><button className={classes.csv} onClick={exportToCSV}>Export as CSV</button></span>
     </div>
   );
 };

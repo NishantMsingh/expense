@@ -3,7 +3,9 @@ import classes from './Home.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import CartContext from '../../Store/Cart-context';
 import DailyExpensesPage from "../Expense/DailyExpensesPage "
+import "./Slider.css"
 const Home = () => {
+
   const ctx=useContext(CartContext);
   const navigate=useNavigate();
   const [userDetails, setUserDetails] = useState(null);
@@ -43,12 +45,23 @@ const Home = () => {
     }
   }, []);
 
+
+  const premiumHandler =()=>{
+ctx.PremiumCall();
+
+  }
+
+
+  const lightHandler=()=>{
+    ctx.callTog();
+  }
   return (
-    <div className={classes.homeBody}>
+    <div className={ctx.toggle ? classes.homeBodyLight :classes.homeBodyDark}>
      <div className={classes.HomeHeader}>
-  <h3>Welcome to Expense Tracker</h3>
+  <h3 className={classes.heading}>Welcome to Expense Tracker {ctx.setPremium &&  <span className={ctx.toggle ? classes.off :classes.on} onClick={lightHandler}>Dark mode off</span>}</h3>
   {userDetails ? (
     <div className={classes.profiledeatils}>
+       {ctx.premium&& !ctx.setPremium &&  <span className={classes.premium}onClick={premiumHandler}>Activate the premium</span>}
       <img src={userDetails.photoUrl} alt="/" className={classes.profileimage} />
       <span className={classes.username}>{userDetails.displayName}</span>
     </div>
